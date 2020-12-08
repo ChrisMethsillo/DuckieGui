@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
         self.y=200
         self.map=("","")
 
-        self.setWindowIcon(QIcon('DuckieGUI_icon.png'))
+        self.setWindowIcon(QIcon('img\DuckieGUI_icon.png'))
         self.label=QLabel(self)
         self.label.setText("Mapa escogido: \""+self.map[0]+"\"")
         self.label.setGeometry(10,self.y-30,self.x,30)
@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
             msg.setText("Seleccione un mapa")
             x = msg.exec_()
         else:
-            subprocess.Popen("conda activate gym-duckietown && python manual_control.py --env-name Duckietown --map-name "+self.map[0],shell=True)
+            subprocess.Popen("conda activate gym-duckietown && python simulator/manual_control.py --env-name Duckietown --map-name "+self.map[0],shell=True)
 #Ejecucion del script
 if __name__ == "__main__":  
     app = QApplication([])

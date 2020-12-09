@@ -1,17 +1,16 @@
-from PyQt5.QtGui import QIcon, QPalette, QColor, QPixmap, QFont
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QFrame, QLabel, QComboBox, QLineEdit,
-                             QPushButton, QWidget)
-
-
-# ===================== CLASE ventanaLogin =========================
-
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import * 
+from PyQt5.QtGui import *
+# ===================== CLASE SpeedWindow =========================
 class SpeedWindow(QWidget):
     def __init__(self, parent=None):
         super(SpeedWindow, self).__init__(parent)
         self.x, self.y=380, 180
+
+        self.linearVelocity="0.44"
+        self.AngularVelocity="0.35"
         
-        self.setWindowTitle("Velocidad del DuckieBot")
+        self.setWindowTitle("DuckieBot speed")
         self.setWindowIcon(QIcon("img/icon.png"))
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
         self.setFixedSize(self.x,self.y)
@@ -19,7 +18,7 @@ class SpeedWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        labelVL = QLabel("Velocidad Lineal", self)
+        labelVL = QLabel("Linear speed", self)
         labelVL.move(50, 10)
 
         frameVL = QFrame(self)
@@ -29,6 +28,7 @@ class SpeedWindow(QWidget):
         frameVL.move(50, 30)
 
         self.lineEditVL = QLineEdit(frameVL)
+        self.lineEditVL.setValidator(QDoubleValidator())
         self.lineEditVL.setFrame(False)
         self.lineEditVL.setTextMargins(8, 0, 4, 1)
         self.lineEditVL.setFixedWidth(238)
@@ -37,7 +37,7 @@ class SpeedWindow(QWidget):
 
         # ========================================================
 
-        labelVA = QLabel("Velocidad Angular", self)
+        labelVA = QLabel("Angular speed", self)
         labelVA.move(50, 70)
 
         frameVA = QFrame(self)
@@ -48,26 +48,27 @@ class SpeedWindow(QWidget):
 
 
         self.lineEditVA = QLineEdit(frameVA)
+        self.lineEditVA.setValidator(QDoubleValidator())
         self.lineEditVA.setFrame(False)
         self.lineEditVA.setTextMargins(8, 0, 4, 1)
         self.lineEditVA.setFixedWidth(238)
         self.lineEditVA.setFixedHeight(26)
         self.lineEditVA.move(40, 1)
+        
 
       # ================== WIDGETS QPUSHBUTTON ===================
 
-        buttonLogin = QPushButton("Aceptar", self)
-        buttonLogin.setFixedWidth(135)
-        buttonLogin.setFixedHeight(28)
-        buttonLogin.move(120, 130)
+        OkButton = QPushButton("Accept", self)
+        OkButton.setFixedWidth(135)
+        OkButton.setFixedHeight(28)
+        OkButton.move(120, 130)
+        OkButton.clicked.connect(self.velocity)
 
       # ==================== SEÑALES BOTONES =====================
     def velocity(self):
-        self.linearVelocity=self.lineEditVL.text()
-        self.AngularVelocity=self.lineEditVA.text()
-
-
-# ================================================================
+        self.linearVelocity=str(self.lineEditVL.text())
+        self.AngularVelocity=str(self.lineEditVA.text())
+        self.close()
 
 if __name__ == '__main__':
     

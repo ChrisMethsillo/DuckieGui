@@ -59,7 +59,7 @@ class MainWindow(QMainWindow):
             msg.setText("Choose a map")
             x = msg.exec_()
         else:
-            subprocess.Popen("conda activate gym-duckietown && python simulator/manual_control.py --env-name Duckietown --map-name "+
+            subprocess.Popen("conda activate gym-duckietown && python gym-duckietown/manual_control.py --env-name Duckietown --map-name "+
             self.map[0]+" --linearspeed "+linearspeed+" --bend "+bend,shell=True)
 
         

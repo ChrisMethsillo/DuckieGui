@@ -25,6 +25,10 @@ class MapWindow(QWidget):
         self.button_map = QPushButton(self, text="Escoger Mapa")
         self.button_map.setGeometry(int(self.x/2-55),int(self.y/2-50),110,30)
         self.button_map.clicked.connect(self.map_select)
+        
+        self.button_close = QPushButton(self, text="Aceptar")
+        self.button_close.setGeometry(int(self.x/2-75),int(self.y/2-70),110,30)
+        self.button_close.clicked.connect(self.close())
 
     def map_select(self):#Esta funcion se encarga de selecionar el mapa de la simulacion
         self.map= QFileDialog.getOpenFileName(self, "Select Map","", "Archivos soportados (*.yaml)")

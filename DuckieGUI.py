@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 from lib.speed_chooser import *
+from lib.camera_chooser import *
 import subprocess
 
 class MainWindow(QMainWindow):
@@ -11,6 +12,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.map=('','')
         self.speedchooser=SpeedWindow()
+        self.camerachooser=CamWindow()
         
         #Estructura de la ventana principal
         self.x=400
@@ -31,11 +33,16 @@ class MainWindow(QMainWindow):
         self.button_map.clicked.connect(self.map_select)
 
         self.button_speed = QPushButton(self, text="Select speed")
-        self.button_speed.setGeometry(120,10,110,30)
+        self.button_speed.setGeometry(10,50,110,30)
         self.button_speed.clicked.connect(self.velocity_select)
 
+        self.button_speed = QPushButton(self, text="Select camera")
+        self.button_speed.setGeometry(10,90,110,30)
+        self.button_speed.clicked.connect(self.camera_select)
+
+
         self.button_run = QPushButton(self, text="Start simulation")
-        self.button_run.setGeometry(120,self.y-70,110,30)
+        self.button_run.setGeometry(10,self.y-70,110,30)
         self.button_run.clicked.connect(self.run_simulation)
 
 
@@ -46,9 +53,16 @@ class MainWindow(QMainWindow):
     def velocity_select(self):
         self.speedchooser.show()
 
+    def camera_select(self):
+        self.camerachooser.show()
+
     def run_simulation(self):
         linearspeed=self.speedchooser.linearVelocity
-        bend=self.speedchooser.AngularVelocity
+        bend=self.speedchooser.angularVelocity
+        camera=self.camerachooser.camera
+        distortion=self.camerachooser.distortion
+        collision=self.camerachooser.collision
+        curve=self.camerachooser.roadline
 
         if self.map[0]=="":
             msg = QMessageBox()
@@ -60,7 +74,7 @@ class MainWindow(QMainWindow):
             x = msg.exec_()
         else:
             subprocess.Popen("conda activate gym-duckietown && python gym-duckietown/manual_control.py --env-name Duckietown --map-name "+
-            self.map[0]+" --linearspeed "+linearspeed+" --bend "+bend,shell=True)
+            self.map[0]+" --distortion "+distortion+" --draw-curve "+curve+" --draw-bbox "+collision+" --linearspeed "+linearspeed+" --bend "+bend+" --camera "+camera,shell=True)
 
         
         

@@ -8,7 +8,7 @@ class SpeedWindow(QWidget):
         self.x, self.y=380, 180
 
         self.linearVelocity="0.44"
-        self.AngularVelocity="0.35"
+        self.angularVelocity="1"
         
         self.setWindowTitle("DuckieBot speed")
         self.setWindowIcon(QIcon("img/icon.png"))
@@ -67,7 +67,7 @@ class SpeedWindow(QWidget):
       # ==================== SEÑALES BOTONES =====================
     def velocity(self):
         self.linearVelocity=str(self.lineEditVL.text())
-        self.AngularVelocity=str(self.lineEditVA.text())
+        self.angularVelocity=str(self.lineEditVA.text())
         self.close()
 
 if __name__ == '__main__':

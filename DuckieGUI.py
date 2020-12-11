@@ -13,10 +13,16 @@ class MainWindow(QMainWindow):
         self.map=('','')
         self.speedchooser=SpeedWindow()
         self.camerachooser=CamWindow()
+
+        self.img=QLabel(self)
+        self.pixmap = QPixmap('img\icon.png')
+        self.img.setPixmap(self.pixmap)
+        self.img.setGeometry(140,10,430,300)
+
         
         #Estructura de la ventana principal
-        self.x=400
-        self.y=300
+        self.x=480
+        self.y=340
 
         self.setWindowIcon(QIcon('img\icon.png'))
         self.label=QLabel(self)

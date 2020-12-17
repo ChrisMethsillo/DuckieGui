@@ -3,9 +3,10 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 # ===================== CLASE SpeedWindow =========================
 class SpeedWindow(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self,mainwindow, parent=None):
         super(SpeedWindow, self).__init__(parent)
         self.x, self.y=380, 180
+        self.window=mainwindow
 
         self.linearVelocity="0.44"
         self.angularVelocity="1"
@@ -68,21 +69,6 @@ class SpeedWindow(QWidget):
     def velocity(self):
         self.linearVelocity=str(self.lineEditVL.text())
         self.angularVelocity=str(self.lineEditVA.text())
+        self.window.label3.setText("Linear speed: "+ str(self.linearVelocity))
+        self.window.label4.setText("Angular speed: "+str(self.angularVelocity))
         self.close()
-
-if __name__ == '__main__':
-    
-    import sys
-    
-    aplicacion = QApplication(sys.argv)
-
-    fuente = QFont()
-    fuente.setPointSize(10)
-    fuente.setFamily("Bahnschrift Light")
-
-    aplicacion.setFont(fuente)
-    
-    ventana = SpeedWindow()
-    ventana.show()
-    
-    sys.exit(aplicacion.exec_())

@@ -11,8 +11,8 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.map=('','')
-        self.speedchooser=SpeedWindow()
-        self.camerachooser=CamWindow()
+        self.speedchooser=SpeedWindow(self)
+        self.camerachooser=CamWindow(self)
 
         self.img=QLabel(self)
         self.pixmap = QPixmap('img\icon.png')
@@ -22,12 +22,24 @@ class MainWindow(QMainWindow):
         
         #Estructura de la ventana principal
         self.x=480
-        self.y=340
+        self.y=420
 
         self.setWindowIcon(QIcon('img\icon.png'))
         self.label=QLabel(self)
-        self.label.setText("Chosen map: \""+self.map[0]+"\"")
-        self.label.setGeometry(10,self.y-30,self.x,30)
+        self.label.setText("Chosen map:")
+        self.label.setGeometry(140,self.y-100,self.x,30)
+
+        self.label2=QLabel(self)
+        self.label2.setText("Camera: "+self.camerachooser.cameralabel)
+        self.label2.setGeometry(140,self.y-80,self.x,30)
+
+        self.label3=QLabel(self)
+        self.label3.setText("Linear speed: "+ str(self.speedchooser.linearVelocity))
+        self.label3.setGeometry(140,self.y-60,self.x,30)
+
+        self.label4=QLabel(self)
+        self.label4.setText("Angular speed: "+str(self.speedchooser.angularVelocity))
+        self.label4.setGeometry(140,self.y-40,self.x,30)
         
         self.setWindowTitle("DuckieGUI")
         self.setFixedSize(self.x, self.y)
@@ -46,7 +58,6 @@ class MainWindow(QMainWindow):
         self.button_speed.setGeometry(10,90,110,30)
         self.button_speed.clicked.connect(self.camera_select)
 
-
         self.button_run = QPushButton(self, text="Start simulation")
         self.button_run.setGeometry(10,self.y-70,110,30)
         self.button_run.clicked.connect(self.run_simulation)
@@ -54,13 +65,28 @@ class MainWindow(QMainWindow):
 
     def map_select(self):#Esta funcion se encarga de selecionar el mapa de la simulacion
         self.map=QFileDialog.getOpenFileName(self, "Select Map","", "Archivos soportados (*.yaml)")
-        self.label.setText("Chosen map: \""+self.map[0]+"\"")
+        i=-1
+        flag=True
+        tex=''
+        while flag:
+            if len(self.map[0])==0:
+                break
+            elif self.map[0][i]=="/":
+                tex=self.map[0][i+1:]
+                flag=False
+            else:
+                i-=1
+        self.label.setText("Chosen map: "+tex)
  
     def velocity_select(self):
         self.speedchooser.show()
+        linearspeed=self.speedchooser.linearVelocity
+        bend=self.speedchooser.angularVelocity
+        
 
     def camera_select(self):
         self.camerachooser.show()
+        self.label2.setText("Camera: "+self.camerachooser.cameralabel)
 
     def run_simulation(self):
         linearspeed=self.speedchooser.linearVelocity
@@ -89,3 +115,5 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     app.exec_()
+    
+

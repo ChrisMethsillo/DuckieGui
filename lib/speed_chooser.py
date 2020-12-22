@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 class SpeedWindow(QWidget):
     def __init__(self,mainwindow, parent=None):
         super(SpeedWindow, self).__init__(parent)
-        self.x, self.y=380, 180
+        self.x, self.y=240, 180
         self.window=mainwindow
 
         self.linearVelocity="0.44"
@@ -24,15 +24,15 @@ class SpeedWindow(QWidget):
 
         frameVL = QFrame(self)
         frameVL.setFrameShape(QFrame.StyledPanel)
-        frameVL.setFixedWidth(280)
+        frameVL.setFixedWidth(140)
         frameVL.setFixedHeight(28)
         frameVL.move(50, 30)
 
         self.lineEditVL = QLineEdit(frameVL)
         self.lineEditVL.setValidator(QDoubleValidator())
         self.lineEditVL.setFrame(False)
-        self.lineEditVL.setTextMargins(8, 0, 4, 1)
-        self.lineEditVL.setFixedWidth(238)
+      
+        self.lineEditVL.setFixedWidth(120)
         self.lineEditVL.setFixedHeight(26)
         self.lineEditVL.move(40, 1)
 
@@ -43,7 +43,7 @@ class SpeedWindow(QWidget):
 
         frameVA = QFrame(self)
         frameVA.setFrameShape(QFrame.StyledPanel)
-        frameVA.setFixedWidth(280)
+        frameVA.setFixedWidth(140)
         frameVA.setFixedHeight(28)
         frameVA.move(50, 90)
 
@@ -51,8 +51,8 @@ class SpeedWindow(QWidget):
         self.lineEditVA = QLineEdit(frameVA)
         self.lineEditVA.setValidator(QDoubleValidator())
         self.lineEditVA.setFrame(False)
-        self.lineEditVA.setTextMargins(8, 0, 4, 1)
-        self.lineEditVA.setFixedWidth(238)
+     
+        self.lineEditVA.setFixedWidth(120)
         self.lineEditVA.setFixedHeight(26)
         self.lineEditVA.move(40, 1)
         
@@ -62,7 +62,7 @@ class SpeedWindow(QWidget):
         OkButton = QPushButton("Accept", self)
         OkButton.setFixedWidth(135)
         OkButton.setFixedHeight(28)
-        OkButton.move(120, 130)
+        OkButton.move(52, 130)
         OkButton.clicked.connect(self.velocity)
 
       # ==================== SEÑALES BOTONES =====================

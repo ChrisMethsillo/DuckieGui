@@ -9,7 +9,7 @@ class CamWindow(QWidget):
         super(CamWindow, self).__init__(*args, **kwargs)
         #Estructura de la ventana principal
         self.x=430
-        self.y=250
+        self.y=240
         self.cameralabel='Duckiebot'
         self.window=mainwindow
 
@@ -24,19 +24,19 @@ class CamWindow(QWidget):
 
         #Definimos los botones para la ejecucion de la simulacion
         #button_top: Ejecuta la funcion para la seleccion del topa de simulacion
-        self.button_top = QPushButton(self, text="Top view")
+        self.button_top = QPushButton(self, text="Top view (Z key)")
         self.button_top.setGeometry(10,20,200,30)
         self.button_top.clicked.connect(self.top_camera)
         
-        self.button_db = QPushButton(self, text="Duckiebot view")
+        self.button_db = QPushButton(self, text="Duckiebot view (X key)")
         self.button_db.setGeometry(10,60,200,30)
         self.button_db.clicked.connect(self.human_camera)
 
-        self.button_fish = QPushButton(self, text="Fish eye view")
+        self.button_fish = QPushButton(self, text="Fish eye view (C key)")
         self.button_fish.setGeometry(10,100,200,30)
         self.button_fish.clicked.connect(self.fish_camera)
 
-        self.button_collision = QPushButton(self, text="Top view with collision boxes")
+        self.button_collision = QPushButton(self, text="Top view with collision boxes (V key)")
         self.button_collision.setGeometry(220,20,200,30)
         self.button_collision.clicked.connect(self.collision_box)
 
@@ -52,6 +52,11 @@ class CamWindow(QWidget):
         self.label=QLabel(self)
         self.label.setText("Chosen view: "+self.cameralabel)
         self.label.setGeometry(10,self.y-30,self.x,30)
+
+        self.label2=QLabel(self)
+        self.label2.setText("You can change the cameras in the simulator using the keys")
+        self.label2.setGeometry(68,140,self.x,30)
+
 
 
     def top_camera(self):

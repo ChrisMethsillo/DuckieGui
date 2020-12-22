@@ -17,7 +17,7 @@ class MainWindow(QMainWindow):
         self.img=QLabel(self)
         self.pixmap = QPixmap('img\icon.png')
         self.img.setPixmap(self.pixmap)
-        self.img.setGeometry(140,10,430,300)
+        self.img.setGeometry(140,10,430,320)
 
         
         #Estructura de la ventana principal
@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
         self.button_speed.setGeometry(10,50,110,30)
         self.button_speed.clicked.connect(self.velocity_select)
 
-        self.button_speed = QPushButton(self, text="Select camera")
+        self.button_speed = QPushButton(self, text="Select initial camera")
         self.button_speed.setGeometry(10,90,110,30)
         self.button_speed.clicked.connect(self.camera_select)
 

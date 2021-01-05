@@ -2,6 +2,8 @@
 ## Introducción :
 El Duckiegym User Interface (DUI) consiste en una interfaz que permite de una manera más sencilla el cambio de mapa, velocidad y cámara del simulador gym-duckietown.
 ## Requisitos previos:
+- Windows 7 o 10
+
 - [Conda](https://www.anaconda.com/products/individual) o [MiniConda](https://docs.conda.io/en/latest/miniconda.html)
 
 - Python 3.6+
